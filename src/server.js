@@ -1,13 +1,11 @@
 import "express-async-errors";
 import express from "express";
 
-import { DB } from "./database/sqlite/index.js";
 import { AppError } from "./utils/AppError.js";
 import { routes } from "./routes/index.js";
 
-const database = new DB();
-
 const app = express();
+
 app.use(express.json());
 app.use(routes);
 
@@ -25,8 +23,6 @@ app.use((error, request, response, next) => {
   });
 });
 
-const PORT = process.env.PORT || 3001;
-
-database
-  .execute()
-  .then(() => app.listen(PORT, () => console.log(`> [application] running!`)));
+app.listen(process.env.PORT || 3001, () =>
+  console.log(`> [application] running!`)
+);
