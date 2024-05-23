@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { UsersController } from "../controllers/UsersController.js";
-
 const usersRoutes = Router();
+
+import { UsersController } from "../controllers/UsersController.js";
 const usersController = new UsersController();
 
 usersRoutes.post("/", usersController.create);
