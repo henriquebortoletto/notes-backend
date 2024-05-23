@@ -2,6 +2,13 @@ import knex from "../database/knex/index.js";
 import { AppError } from "../utils/AppError.js";
 
 export class NotesController {
+  async index(request, response) {
+    const { id } = request.query;
+    const notes = await knex("notes").where({ user_id: id }).orderBy("title");
+
+    return response.status(200).json(notes);
+  }
+
   async show(request, response) {
     const { id } = request.params;
 
