@@ -9,7 +9,10 @@ export class UsersController {
 
     const checkUserExists = await knex("users").where({ email }).first();
 
-    if (checkUserExists) throw new AppError("User already exists.");
+    if (checkUserExists) {
+      throw new AppError("User already exists.");
+    }
+
     const criptoPassword = await bcrypt.hash(password, 10);
 
     await knex("users").insert({
@@ -26,7 +29,10 @@ export class UsersController {
     const { id } = request.params;
 
     const user = await knex("users").where({ id }).first();
-    if (!user) throw new AppError("User not found.");
+
+    if (!user) {
+      throw new AppError("User not found.");
+    }
 
     const userWithUpdatedEmail = await knex("users").where({ email }).first();
 
