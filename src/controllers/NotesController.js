@@ -48,4 +48,16 @@ export class NotesController {
 
     return response.status(201).json();
   }
+
+  async delete(request, response) {
+    const { id } = request.params;
+
+    const noteHasDeleted = await knex("notes").where({ id }).delete();
+
+    if (!noteHasDeleted) {
+      throw new AppError("Note not found.");
+    }
+
+    return response.status(200).json();
+  }
 }
