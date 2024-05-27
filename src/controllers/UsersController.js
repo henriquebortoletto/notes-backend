@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 
 import knex from "../database/knex/index.js";
-import { AppError } from "../utils/AppError.js";
+import AppError from "../utils/AppError.js";
 
 export class UsersController {
   async create(request, response) {
