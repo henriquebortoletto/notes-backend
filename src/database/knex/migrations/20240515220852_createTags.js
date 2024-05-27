@@ -2,6 +2,7 @@ export function up(knex) {
   return knex.schema.createTable("tags", function (table) {
     table.increments("id");
     table.string("name").notNullable();
+    table.integer("user_id").references("id").inTable("users");
     table
       .integer("note_id")
       .references("id")
