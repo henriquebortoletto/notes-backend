@@ -7,12 +7,12 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js",
-    "run:migrate": "knex migrate:latest"
+    "migrate:run": "knex migrate:latest"
   },
   "keywords": [
     "express",
-    "nodemon"
+    "nodemon",
+    "knex"
   ],
   "license": "ISC",
   "dependencies": {
