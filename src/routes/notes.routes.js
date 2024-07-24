@@ -1,12 +1,15 @@
 import { Router } from "express";
-const router = Router();
 
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated.js";
 import { NotesController } from "../controllers/NotesController.js";
+
+const router = Router();
 const notesController = new NotesController();
 
+router.use(ensureAuthenticated);
 router.get("/", notesController.index);
 router.get("/:id", notesController.show);
-router.post("/:user_id", notesController.create);
+router.post("/", notesController.create);
 router.delete("/:id", notesController.delete);
 
 export { router };
