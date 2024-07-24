@@ -26,9 +26,9 @@ export class UsersController {
 
   async update(request, response) {
     const { name, email, password, old_password } = request.body;
-    const { id } = request.params;
+    const user_id = request.user.id;
 
-    const user = await knex("users").where({ id }).first();
+    const user = await knex("users").where({ id: user_id }).first();
 
     if (!user) {
       throw new AppError("User not found.");
@@ -52,14 +52,17 @@ export class UsersController {
         user.password
       );
 
-      if (!checkOldPassword) throw new AppError("Old password does not match.");
+      if (!checkOldPassword) {
+        throw new AppError("Old password does not match.");
+      }
+
       user.password = await bcrypt.hash(password, 10);
     }
 
     user.name = name ?? user.name;
     user.email = email ?? user.email;
 
-    await knex("users").where({ id }).update({
+    await knex("users").where({ id: user_id }).update({
       name: user.name,
       email: user.email,
       password: user.password,
