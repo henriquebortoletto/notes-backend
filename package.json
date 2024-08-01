@@ -1,9 +1,9 @@
 {
   "name": "rocketnotes-api",
-  "description": "Projeto de gerenciamento de notas",
+  "description": "Projeto backend para gerenciamento de notas",
   "author": "Henrique Bortoletto <bortolettohenrique@gmail.com>",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "nodemon src/server.js",
