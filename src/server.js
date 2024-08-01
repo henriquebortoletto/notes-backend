@@ -5,13 +5,13 @@ import cors from "cors";
 
 import AppError from "./utils/AppError.js";
 import routes from "./routes/index.js";
-import { UPLOAD_FOLDER } from "./configs/upload.js";
+import config from "./configs/upload.js";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/files", express.static(UPLOAD_FOLDER));
+app.use("/files", express.static(config.FILE_STORAGE));
 app.use(routes);
 
 app.use((error, request, response, next) => {

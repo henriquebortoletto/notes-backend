@@ -5,11 +5,11 @@ import multer from "multer";
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
-export const TMP_FOLDER = path.resolve(__dirname, "..", "..", "tmp");
-export const UPLOAD_FOLDER = path.resolve(TMP_FOLDER, "uploads");
+const TEMP_STORAGE = path.resolve(__dirname, "..", "..", "tmp");
+const FILE_STORAGE = path.resolve(TEMP_STORAGE, "uploads");
 
 const storage = multer.diskStorage({
-  destination: TMP_FOLDER,
+  destination: TEMP_STORAGE,
   filename: (request, file, callback) => {
     const fileHash = crypto.randomBytes(10).toString("hex");
     const fileName = `${fileHash}-${file.originalname}`;
@@ -18,4 +18,10 @@ const storage = multer.diskStorage({
   },
 });
 
-export const uploadFile = multer({ storage });
+const config = {
+  UPLOAD: multer({ storage }),
+  TEMP_STORAGE,
+  FILE_STORAGE,
+};
+
+export default config;

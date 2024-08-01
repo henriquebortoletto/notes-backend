@@ -1,27 +1,24 @@
 import fs from "fs";
 import path from "path";
 
-import { TMP_FOLDER, UPLOAD_FOLDER } from "../configs/upload.js";
+import config from "../configs/upload.js";
 
 export default class DiskStorage {
   async saveFile(file) {
     await fs.promises.rename(
-      path.resolve(TMP_FOLDER, file),
-      path.resolve(UPLOAD_FOLDER, file)
+      path.resolve(config.TEMP_STORAGE, file),
+      path.resolve(config.FILE_STORAGE, file)
     );
-
     return file;
   }
 
   async deleteFile(file) {
-    const filePath = path.resolve(UPLOAD_FOLDER, file);
-
+    const filePath = path.resolve(config.FILE_STORAGE, file);
     try {
       await fs.promises.stat(filePath);
     } catch {
       return;
     }
-
     await fs.promises.unlink(filePath);
   }
 }
