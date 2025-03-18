@@ -10,8 +10,8 @@ POST http://{{host}}/sessions HTTP/1.1
 Content-Type: {{contentType}}
 
 {
-  "email": "",
-  "password": ""
+  "email": "bortolettohenrique@gmail.com",
+  "password": "Mohave796523#"
 }
 
 ###
@@ -24,3 +24,9 @@ GET http://{{host}}/tags HTTP/1.1
 Content-Type: {{contentType}}
 Authorization: {{token}}
 
+###
+
+# @name notes
+GET http://{{host}}/notes?title=&tags= HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: {{token}}
