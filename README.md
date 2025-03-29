@@ -1,5 +1,3 @@
-# RocketNotes - Backend
-
 ## 💻 Sobre o Projeto
 
 RocketNotes é uma aplicação para gerenciamento de notas e links úteis. Este é o backend da aplicação, desenvolvido em Node.js, que fornece uma API RESTful para gerenciar usuários, notas, tags e links.
