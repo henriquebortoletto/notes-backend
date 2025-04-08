@@ -3,11 +3,15 @@ import bcrypt from "bcryptjs";
 import knex from "../database/knex/index.js";
 import AppError from "../utils/AppError.js";
 
+import { UserRepository } from "../repositories/UserRepository.js";
+
+const userRepository = new UserRepository();
+
 export class UsersController {
   async create(request, response) {
     const { name, email, password } = request.body;
 
-    const checkUserExists = await knex("users").where({ email }).first();
+    const checkUserExists = await userRepository.findByEmail(email);
 
     if (checkUserExists) {
       throw new AppError("User already exists.");
@@ -15,7 +19,7 @@ export class UsersController {
 
     const criptoPassword = await bcrypt.hash(password, 10);
 
-    await knex("users").insert({
+    await userRepository.create({
       name,
       email,
       password: criptoPassword,

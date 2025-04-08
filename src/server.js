@@ -28,6 +28,8 @@ app.use((error, request, response, next) => {
   });
 });
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log(`> [application] running!`);
+const port = process.env.PORT || 3001;
+
+app.listen(port, () => {
+  console.log(`> [application] running! ${port}`);
 });
