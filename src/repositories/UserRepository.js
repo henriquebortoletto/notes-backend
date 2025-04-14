@@ -7,6 +7,12 @@ export class UserRepository {
     return user;
   }
 
+  async findById(id) {
+    const user = await knex("users").where({ id }).first();
+
+    return user;
+  }
+
   async create({ name, email, password }) {
     const [id] = await knex("users").insert({
       name,
@@ -15,5 +21,14 @@ export class UserRepository {
     });
 
     return id;
+  }
+
+  async update({ id, name, email, password }) {
+    await knex("users").where({ id }).update({
+      name,
+      email,
+      password,
+      updated_at: knex.fn.now(),
+    });
   }
 }
