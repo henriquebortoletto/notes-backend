@@ -1,5 +1,5 @@
 {
-  "name": "rocketnotes-api",
+  "name": "notes-backend",
   "description": "Projeto backend para gerenciamento de notas",
   "author": "Henrique Bortoletto <bortolettohenrique@gmail.com>",
   "version": "1.0.0",
@@ -9,7 +9,7 @@
     "start": "pm2-runtime start ecosystem.config.cjs --env production",
     "dev": "nodemon src/server.js",
     "migrate:run": "knex migrate:latest",
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
   },
   "keywords": [
     "express",

@@ -14,13 +14,15 @@ export class UserRepository {
   }
 
   async create({ name, email, password }) {
-    const [id] = await knex("users").insert({
-      name,
-      email,
-      password,
-    });
+    const [user] = await knex("users")
+      .insert({
+        name,
+        email,
+        password,
+      })
+      .returning("*");
 
-    return id;
+    return user;
   }
 
   async update({ id, name, email, password }) {

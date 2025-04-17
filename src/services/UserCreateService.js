@@ -16,10 +16,12 @@ export class UserCreateService {
 
     const criptoPassword = await bcryptjs.hash(password, 10);
 
-    await this.userRepository.create({
+    const userCreated = await this.userRepository.create({
       name,
       email,
       password: criptoPassword,
     });
+
+    return userCreated;
   }
 }
